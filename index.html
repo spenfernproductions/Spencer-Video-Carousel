@@ -1,12 +1,18 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
   <title>Media Portfolio</title>
 
   <style>
+
+    /* =========================================
+       BASIC PAGE SETTINGS
+    ========================================= */
+
     * {
       box-sizing: border-box;
     }
@@ -22,13 +28,25 @@
       font-family: "Courier New", Courier, monospace;
     }
 
+
+    /* =========================================
+       PORTFOLIO
+    ========================================= */
+
     .portfolio {
       position: relative;
+
       width: 100%;
       max-width: 1000px;
+
       margin: 0 auto;
       padding: 20px 70px 35px;
     }
+
+
+    /* =========================================
+       CAROUSEL
+    ========================================= */
 
     .carousel-window {
       width: 100%;
@@ -38,11 +56,15 @@
 
     .carousel {
       width: 100%;
+
       display: flex;
+
       overflow-x: auto;
       overflow-y: hidden;
+
       scroll-behavior: smooth;
       scroll-snap-type: x mandatory;
+
       scrollbar-width: none;
       -ms-overflow-style: none;
     }
@@ -51,91 +73,166 @@
       display: none;
     }
 
+
+    /* =========================================
+       INDIVIDUAL VIDEO CARD
+    ========================================= */
+
     .video-card {
       min-width: 100%;
       width: 100%;
       flex: 0 0 100%;
+
       scroll-snap-align: center;
       scroll-snap-stop: always;
+
       display: flex;
       flex-direction: column;
       align-items: center;
-      text-decoration: none;
+
       color: white;
+      text-decoration: none;
     }
 
+
+    /* =========================================
+       VIDEO THUMBNAILS
+    ========================================= */
+
     .thumbnail {
+      position: relative;
+
       width: 100%;
       max-width: 800px;
+
       aspect-ratio: 16 / 9;
-      position: relative;
+
       margin: 0 auto;
+
       overflow: hidden;
+
       background: #111;
       border-radius: 6px;
     }
 
     .thumbnail img {
+      display: block;
+
       width: 100%;
       height: 100%;
-      display: block;
+
       object-fit: cover;
       object-position: center;
-      transition: transform .3s ease;
+
+      transition: transform 0.3s ease;
     }
 
     .video-card:hover .thumbnail img {
       transform: scale(1.02);
     }
 
+
+    /* =========================================
+       PLAY BUTTON
+    ========================================= */
+
     .play-button {
       position: absolute;
+
       top: 50%;
       left: 50%;
+
       transform: translate(-50%, -50%);
+
       width: 78px;
       height: 78px;
+
       display: flex;
       align-items: center;
       justify-content: center;
+
       border-radius: 50%;
-      background: rgba(0, 0, 0, .78);
+
+      background: rgba(0, 0, 0, 0.78);
+
       color: white;
+
       font-size: 32px;
-      transition: .2s ease;
+
+      pointer-events: none;
+
+      transition:
+        transform 0.2s ease,
+        background 0.2s ease;
     }
 
     .video-card:hover .play-button {
-      transform: translate(-50%, -50%) scale(1.1);
+      transform:
+        translate(-50%, -50%)
+        scale(1.1);
+
       background: #000;
     }
+
+
+    /* =========================================
+       VIDEO TITLES
+    ========================================= */
 
     .title {
       width: 100%;
       max-width: 800px;
+
       margin: 18px auto 0;
+
       text-align: center;
-      font-family: "Courier New", Courier, monospace;
+
+      font-family:
+        "Courier New",
+        Courier,
+        monospace;
+
       font-size: 24pt;
       font-weight: normal;
       line-height: 1.2;
+
       color: white;
     }
 
+
+    /* =========================================
+       LEFT / RIGHT ARROWS
+    ========================================= */
+
     .arrow {
       position: absolute;
+
       top: 43%;
+
       transform: translateY(-50%);
+
       width: 50px;
       height: 80px;
+
       border: 0;
       border-radius: 4px;
-      background: rgba(0, 0, 0, .75);
+
+      background: rgba(0, 0, 0, 0.75);
+
       color: white;
-      font-family: "Courier New", Courier, monospace;
+
+      font-family:
+        "Courier New",
+        Courier,
+        monospace;
+
       font-size: 40px;
+
       cursor: pointer;
+
       z-index: 20;
+
+      transition: background 0.2s ease;
     }
 
     .arrow:hover {
@@ -150,9 +247,18 @@
       right: 8px;
     }
 
-    @media(max-width:700px) {
+
+    /* =========================================
+       MOBILE
+    ========================================= */
+
+    @media (max-width: 700px) {
+
       .portfolio {
-        padding: 15px 45px 30px;
+        padding:
+          15px
+          45px
+          30px;
       }
 
       .title {
@@ -162,46 +268,70 @@
       .arrow {
         width: 36px;
         height: 60px;
+
         font-size: 28px;
       }
 
       .play-button {
         width: 58px;
         height: 58px;
+
         font-size: 24px;
       }
+
     }
+
   </style>
 </head>
 
+
 <body>
+
 
   <div class="portfolio">
 
+
+    <!-- =========================================
+         LEFT ARROW
+    ========================================== -->
+
     <button
       class="arrow arrow-left"
+      type="button"
       aria-label="Previous video"
-      onclick="move(-1)">
+      onclick="moveCarousel(-1)">
       ‹
     </button>
 
+
+
     <div class="carousel-window">
 
-      <div class="carousel" id="videoCarousel">
+      <div
+        class="carousel"
+        id="videoCarousel">
 
-        <!-- PAPERCUT - FIRST VIDEO -->
+
+        <!-- =====================================
+             1. PAPERCUT
+        ====================================== -->
+
         <a
           class="video-card"
           href="https://vimeo.com/788388427"
           target="_blank"
-          rel="noopener">
+          rel="noopener noreferrer">
 
           <div class="thumbnail">
+
             <img
               src="https://vumbnail.com/788388427.jpg"
               alt="PAPERCUT Unofficial Music Video">
 
-            <div class="play-button">▶</div>
+            <div class="play-button">
+              ▶
+            </div>
+
           </div>
 
           <div class="title">
@@ -211,19 +341,27 @@
         </a>
 
 
-        <!-- SENIOR PROJECT TRAILER -->
+
+        <!-- =====================================
+             2. SENIOR PROJECT TRAILER
+        ====================================== -->
+
         <a
           class="video-card"
           href="https://vimeo.com/1229190469?share=copy&amp;fl=sv&amp;fe=ci"
           target="_blank"
-          rel="noopener">
+          rel="noopener noreferrer">
 
           <div class="thumbnail">
+
             <img
               src="https://vumbnail.com/1229190469.jpg"
               alt="Senior Project Trailer">
 
-            <div class="play-button">▶</div>
+            <div class="play-button">
+              ▶
+            </div>
+
           </div>
 
           <div class="title">
@@ -233,19 +371,27 @@
         </a>
 
 
-        <!-- DOCUMENTARY -->
+
+        <!-- =====================================
+             3. DOCUMENTARY
+        ====================================== -->
+
         <a
           class="video-card"
           href="https://vimeo.com/803558248?share=copy&amp;fl=sv&amp;fe=ci"
           target="_blank"
-          rel="noopener">
+          rel="noopener noreferrer">
 
           <div class="thumbnail">
+
             <img
               src="https://vumbnail.com/803558248.jpg"
               alt="Documentary">
 
-            <div class="play-button">▶</div>
+            <div class="play-button">
+              ▶
+            </div>
+
           </div>
 
           <div class="title">
@@ -255,19 +401,30 @@
         </a>
 
 
-        <!-- THE MONSTER -->
+
+        <!-- =====================================
+             4. THE MONSTER
+
+             Uses your custom black-and-white
+             thumbnail stored in GitHub.
+        ====================================== -->
+
         <a
           class="video-card"
           href="https://vimeo.com/1229188766?share=copy&amp;fl=sv&amp;fe=ci"
           target="_blank"
-          rel="noopener">
+          rel="noopener noreferrer">
 
           <div class="thumbnail">
+
             <img
-              src="https://vumbnail.com/1229188766.jpg"
+              src="./the-monster-thumbnail.png"
               alt="The Monster">
 
-            <div class="play-button">▶</div>
+            <div class="play-button">
+              ▶
+            </div>
+
           </div>
 
           <div class="title">
@@ -277,19 +434,27 @@
         </a>
 
 
-        <!-- NIGHTMARE VIDEO ESSAY -->
+
+        <!-- =====================================
+             5. NIGHTMARE VIDEO ESSAY
+        ====================================== -->
+
         <a
           class="video-card"
           href="https://youtu.be/al-Pgjqdz_4"
           target="_blank"
-          rel="noopener">
+          rel="noopener noreferrer">
 
           <div class="thumbnail">
+
             <img
               src="https://img.youtube.com/vi/al-Pgjqdz_4/hqdefault.jpg"
               alt="Nightmare Video Essay">
 
-            <div class="play-button">▶</div>
+            <div class="play-button">
+              ▶
+            </div>
+
           </div>
 
           <div class="title">
@@ -299,19 +464,27 @@
         </a>
 
 
-        <!-- GUNK -->
+
+        <!-- =====================================
+             6. GUNK
+        ====================================== -->
+
         <a
           class="video-card"
           href="https://www.youtube.com/watch?v=vV7w-f7S6Q4"
           target="_blank"
-          rel="noopener">
+          rel="noopener noreferrer">
 
           <div class="thumbnail">
+
             <img
               src="https://img.youtube.com/vi/vV7w-f7S6Q4/hqdefault.jpg"
               alt="GUNK">
 
-            <div class="play-button">▶</div>
+            <div class="play-button">
+              ▶
+            </div>
+
           </div>
 
           <div class="title">
@@ -320,30 +493,53 @@
 
         </a>
 
+
       </div>
 
     </div>
 
+
+
+    <!-- =========================================
+         RIGHT ARROW
+    ========================================== -->
+
     <button
       class="arrow arrow-right"
+      type="button"
       aria-label="Next video"
-      onclick="move(1)">
+      onclick="moveCarousel(1)">
       ›
     </button>
+
 
   </div>
 
 
-  <script>
-    function move(direction) {
-      const c = document.getElementById('videoCarousel');
 
-      c.scrollBy({
-        left: direction * c.clientWidth,
-        behavior: 'smooth'
+  <!-- =========================================
+       CAROUSEL JAVASCRIPT
+  ========================================== -->
+
+  <script>
+
+    function moveCarousel(direction) {
+
+      const carousel =
+        document.getElementById("videoCarousel");
+
+      carousel.scrollBy({
+        left:
+          direction *
+          carousel.clientWidth,
+
+        behavior: "smooth"
       });
+
     }
+
   </script>
+
 
 </body>
 
